@@ -34,7 +34,6 @@ class PermisoController extends Controller
     // muestra tabla de usuarios del sistema
     public function tablaUsuarios(){
         $usuarios = Usuario::orderBy('id', 'ASC')->get();
-
         return view('backend.admin.rolesypermisos.tabla.tablapermisos', compact('usuarios'));
     }
 
