@@ -37,7 +37,7 @@
     {{-- Sección: API de Canvas --}}
     <div class="card shadow-sm mb-5">
         <div class="card-header bg-dark text-white">
-            <h3 class="mb-0">🎨 API de Canvas (Dibujo)</h3>
+            <h3 class="mb-0">🎨 API de Canvas (Dibujo).</h3>
         </div>
         <div class="card-body text-center">
             <div class="d-flex justify-content-center align-items-center mb-3">
