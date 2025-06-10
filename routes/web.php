@@ -57,4 +57,9 @@ Route::get('sin-permisos', [ControlController::class,'indexSinPermiso'])->name('
 
 Route::get('/admin/dashboard', [DashboardController::class,'vistaDashboard'])->name('admin.dashboard.index');
 
+Route::get('/canvas', function () {
+    return view('backend.apis');
+})->name('canvas.dibujo');
+
+
 
