@@ -63,3 +63,10 @@ Route::get('/apis', function () {
 
 Route::get('/apitest', [ApiTestController::class, 'index']);
 
+Route::middleware('auth')->group(function () {
+    Route::get('/panel', function () {
+        return view('apis'); // Aquí se carga la vista apis.blade.php
+    })->name('panel');
+});
+
+
