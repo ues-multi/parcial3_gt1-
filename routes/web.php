@@ -61,12 +61,14 @@ Route::get('/apis', function () {
     return view('apis');
 })->name('apis');
 
-Route::get('/apitest', [ApiTestController::class, 'index']);
+// Route::get('/apitest', [ApiTestController::class, 'index']);
+//Route::get('/', [LoginController::class,'index'])->name('login');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/panel', function () {
-        return view('apis'); // Aquí se carga la vista apis.blade.php
-    })->name('panel');
+        return view('apis'); // aquí cargas la vista apis.blade.php
+    })->name('admin.panel'); // usa el mismo nombre para consistencia
 });
 
 
