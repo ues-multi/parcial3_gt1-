@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\WorkerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\Login\LoginController;
 use App\Http\Controllers\Controles\ControlController;
@@ -56,5 +57,8 @@ Route::post('/admin/editar-perfil/actualizar', [PerfilController::class, 'editar
 Route::get('sin-permisos', [ControlController::class,'indexSinPermiso'])->name('no.permisos.index');
 
 Route::get('/admin/dashboard', [DashboardController::class,'vistaDashboard'])->name('admin.dashboard.index');
+
+//web worker ruta
+Route::get('/worker',[WorkerController::class, 'index']);
 
 
