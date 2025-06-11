@@ -67,28 +67,38 @@ const snap = document.getElementById("snap");
 const download = document.getElementById("download");
 
 // Solicitar acceso a la cámara
-navigator.mediaDevices.getUserMedia({ video: true })
-    .then(function (stream) {
-        video.srcObject = stream;
-    })
-    .catch(function (err) {
-        console.error("Error al acceder a la cámara: ", err);
+    try {
+        const streamPromise = navigator.mediaDevices.getUserMedia({ video: true });
+        streamPromise.then(stream => {
+            video.srcObject = stream;
+        }).catch(err => {
+            console.error("Error al acceder a la cámara: ", err);
+            alert("Permiso denegado o cámara no disponible.");
+        });
+    } catch (error) {
+        console.error("Excepción inesperada:", error);
+        alert("Hubo un problema al intentar acceder a la cámara.");
+    }
+
+    // Tomar foto
+    snap.addEventListener("click", function () {
+        try {
+            const context = canvas.getContext("2d");
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            const dataURL = canvas.toDataURL("image/png");
+
+            // Mostrar imagen capturada
+            photo.setAttribute("src", dataURL);
+            photo.style.display = "block";
+
+            // Preparar descarga
+            download.href = dataURL;
+            download.style.display = "inline-block";
+        } catch (error) {
+            console.error("Error al capturar la imagen:", error);
+            alert("No se pudo capturar la imagen. Intenta nuevamente.");
+        }
     });
-
-// Tomar foto
-snap.addEventListener("click", function () {
-    const context = canvas.getContext("2d");
-    context.drawImage(video, 0, 0, canvas.width, canvas.height);
-    const dataURL = canvas.toDataURL("image/png");
-
-    // Mostrar imagen capturada
-    photo.setAttribute("src", dataURL);
-    photo.style.display = "block";
-
-    // Preparar descarga
-    download.href = dataURL;
-    download.style.display = "inline-block";
-});
 
 
     // API de Geolocalización
@@ -148,14 +158,17 @@ function draw(event) {
     ctx.fill();
 }
 
-document.getElementById("saveCanvas").addEventListener("click", () => {
-    const image = canvasDraw.toDataURL("image/jpeg");
-    const a = document.createElement("a");
-    a.href = image;
-    a.download = "dibujo.jpg";
-    a.click();
-});
-
-
+    document.getElementById("saveCanvas").addEventListener("click", () => {
+        try {
+            const image = canvasDraw.toDataURL("image/jpeg");
+            const a = document.createElement("a");
+            a.href = image;
+            a.download = "dibujo.jpg";
+            a.click();
+        } catch (error) {
+            console.error("Error al guardar el dibujo:", error);
+            alert("No se pudo guardar el dibujo.");
+        }
+    });
 </script>
 @endpush
