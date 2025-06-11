@@ -170,5 +170,6 @@ function draw(event) {
             alert("No se pudo guardar el dibujo.");
         }
     });
+    
 </script>
 @endpush
