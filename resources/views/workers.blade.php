@@ -10,27 +10,33 @@
     <h2>Primeros 50 numeros</h2>
     <ul id="lista_orden"></ul>
 
-    <script>
-        let worker = new Worker('{{ asset('js/webworker/worker.js') }}');
-        let arreglo = [];//arreglo
-        //gernar numeros
-        worker.onmessage = function(event) {
-            //mostrar arreglo
-             arreglo = event.data; // El arreglo recibido
-             const lista = document.getElementById('lista');            
-             //mostrar arreglo con los 100,000 en vista
-            lista.textContent = JSON.stringify(arreglo, null,2)
-            //otra lista para mostrar los primeros 50
-            const lista2 = document.getElementById('lista_orden');
-            //oredena los los numeros de menor a mayor y solo los primero 50
-            let ordenados = arreglo.sort((a, b) => (a-b)).slice(0,50);
-            //Muestra los primeros 50 numeros ya ordenados en la vista
-            lista2.textContent = JSON.stringify(ordenados, null,2)
-             
-        };
-        
-        // Enviar mensaje para activar el worker
-        worker.postMessage('generar');
-    </script>
+   <script>
+    let worker = new Worker('{{ asset('js/webworker/worker.js') }}');
+    let arreglo = [];
+
+    worker.onmessage = function(event) {
+        const data = event.data;
+        const lista = document.getElementById('lista');
+        const lista2 = document.getElementById('lista_orden');
+
+        if (data.error) {
+            lista.textContent = "Error en worker: " + data.error;
+            lista2.textContent = "";
+            return;
+        }
+
+        arreglo = data;
+        lista.textContent = JSON.stringify(arreglo, null, 2);
+        let ordenados = arreglo.slice().sort((a, b) => a - b).slice(0, 50);
+        lista2.textContent = JSON.stringify(ordenados, null, 2);
+    };
+
+    worker.onerror = function(e) {
+        console.error("Error interno en el worker:", e.message);
+    };
+
+    worker.postMessage('generar');
+</script>
+
 </body>
 </html>
