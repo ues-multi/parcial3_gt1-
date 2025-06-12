@@ -2,41 +2,70 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Web Worker Números</title>
+    <title>Generación de Números</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h2>Generacion de numeros</h2>
-    <ul id="lista"></ul>
-    <h2>Primeros 50 numeros</h2>
-    <ul id="lista_orden"></ul>
+<body class="bg-light text-dark p-4">
 
-   <script>
-    let worker = new Worker('{{ asset('js/webworker/worker.js') }}');
-    let arreglo = [];
+    <div class="container">
+        <h1 class="mb-4 text-center">Generación de Números Aleatorios</h1>
 
-    worker.onmessage = function(event) {
-        const data = event.data;
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                Primeros 50 Números Ordenados
+            </div>
+            <div class="card-body">
+                <pre id="lista_orden"></pre>
+            </div>
+        </div>
+
+        <div id="loading" class="text-center my-4">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Cargando...</span>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                Lista Completa de Números (100,000)
+            </div>
+            <div class="card-body" style="max-height: 300px; overflow-y: scroll;">
+                <pre id="lista" class="text-wrap"></pre>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let worker = new Worker('{{ asset('js/webworker/worker.js') }}');
+        let arreglo = [];
+        const loading = document.getElementById('loading');
         const lista = document.getElementById('lista');
         const lista2 = document.getElementById('lista_orden');
 
-        if (data.error) {
-            lista.textContent = "Error en worker: " + data.error;
-            lista2.textContent = "";
-            return;
-        }
+        worker.onmessage = function(event) {
+           try {
+            arreglo = event.data;
 
-        arreglo = data;
-        lista.textContent = JSON.stringify(arreglo, null, 2);
-        let ordenados = arreglo.slice().sort((a, b) => a - b).slice(0, 50);
-        lista2.textContent = JSON.stringify(ordenados, null, 2);
-    };
+            if (!Array.isArray(arreglo)) {
+                throw new Error("Los datos recibidos no son un arreglo.");
+            }
 
-    worker.onerror = function(e) {
-        console.error("Error interno en el worker:", e.message);
-    };
+            loading.style.display = 'none';
+            lista.textContent = JSON.stringify(arreglo, null, 2);
 
-    worker.postMessage('generar');
-</script>
+            let ordenados = arreglo.slice().sort((a, b) => a - b).slice(0, 50);
+            lista2.textContent = ordenados.join(', ');
 
+            } catch (error) {
+                loading.innerHTML = `<div class="alert alert-danger">Error al procesar datos: ${error.message}</div>`;
+            }
+        };
+
+        worker.onerror = function(e) {
+            loading.innerHTML = `<div class="alert alert-danger">Error: ${e.message}</div>`;
+        };
+
+        worker.postMessage('generar');
+    </script>
 </body>
 </html>
