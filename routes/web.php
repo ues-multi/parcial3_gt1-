@@ -59,6 +59,6 @@ Route::get('sin-permisos', [ControlController::class,'indexSinPermiso'])->name('
 Route::get('/admin/dashboard', [DashboardController::class,'vistaDashboard'])->name('admin.dashboard.index');
 
 //web worker ruta
-Route::get('/worker',[WorkerController::class, 'index']);
+Route::get('/worker',[WorkerController::class, 'index'])->name('web.worker');
 
 
