@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\Registro\RegistroController;
 use App\Http\Controllers\ApiTestController;
 
 
+
 use App\Http\Controllers\Backend\Dashboard\DashboardController;
 
 
@@ -65,10 +66,11 @@ Route::get('/apis', function () {
 //Route::get('/', [LoginController::class,'index'])->name('login');
 
 
-Route::middleware('auth')->group(function () {
-    Route::get('/panel', function () {
-        return view('apis'); // aquí cargas la vista apis.blade.php
-    })->name('admin.panel'); // usa el mismo nombre para consistencia
-});
+//Route::middleware('auth')->group(function () {
+//    Route::get('/panel', function () {
+//        return view('apis'); // aquí cargas la vista apis.blade.php
+//    })->name('admin.panel'); // usa el mismo nombre para consistencia
+//});
 
+Route::get('/api-video', [ApiTestController::class, 'index'])->name('api.video');
 

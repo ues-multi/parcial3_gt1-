@@ -37,14 +37,19 @@
                             </a>
                         </li>
 
-                        <li class="nav-item">
-                           <a class="nav-link" href="{{ route('pis') }}">APIs</a>
-                        </li>
+
 
 
                     </ul>
                  </li>
                 @endcan
+
+                                        <li class="nav-item">
+                           <a class="nav-link" href="{{ route('api.video') }}" target="frameprincipal">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>API de Video</p>
+                            </a>
+                        </li>
 
 
 
