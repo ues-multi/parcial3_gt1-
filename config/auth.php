@@ -60,10 +60,10 @@ return [
     */
 
     'providers' => [
-        /* 'users' => [
+        'users' => [
              'driver' => 'eloquent',
-             'model' => App\Models\User::class,
-         ],*/
+             'model' => App\Models\Usuario::class,
+         ],
 
         'admin' => [
             'driver' => 'eloquent',

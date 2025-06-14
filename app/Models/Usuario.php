@@ -21,21 +21,21 @@ class Usuario extends Authenticatable
      *
      * @var array
      */
-    /*protected $fillable = [
+    protected $fillable = [
         'name',
         'email',
         'password',
-    ];*/
+    ];
 
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
-    /* protected $hidden = [
+     protected $hidden = [
          'password',
          'remember_token',
-     ];*/
+     ];
 
     /**
      * The attributes that should be cast to native types.
@@ -45,5 +45,11 @@ class Usuario extends Authenticatable
     /*protected $casts = [
         'email_verified_at' => 'datetime',
     ];*/
+        // Para login con 'usuario' en lugar de 'email'
+    public function getAuthIdentifierName()
+    {
+        return 'usuario';
+    }
+
 
 }

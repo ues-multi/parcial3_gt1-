@@ -37,16 +37,22 @@
                             </a>
                         </li>
 
+
+
+
                     </ul>
                  </li>
                 @endcan
-<!-- GELOCALIZACIÓN -->
-<li class="nav-item">
-    <a href="{{ url('/geolocalizacion') }}" class="nav-link">
-        <i class="fas fa-map-marker-alt nav-icon"></i>
-        <p>Geolocalización</p>
-    </a>
-</li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('api.video') }}" target="frameprincipal">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>API de Video</p>
+                            </a>
+                        </li>
+
+
+
 
             </ul>
         </nav>
