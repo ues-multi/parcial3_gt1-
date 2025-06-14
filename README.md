@@ -4,7 +4,8 @@ Integrantes
 - Leonel Antonio Hernández Pérez - HP12002
 - Lilian Sofía Tejada Villatoro - TV22008
 - Gabriel Alexander Calderón Villeda - CV22022
-- 
+
+ 
 # 🧩 Proyecto Laravel - Sistema Web
 
 Este es un sistema web desarrollado con el framework **Laravel**, el cual ya cuenta con conexión a una **base de datos remota (Clever Cloud)**, por lo que no requiere importar bases de datos locales.
