@@ -61,4 +61,9 @@ Route::get('/admin/dashboard', [DashboardController::class,'vistaDashboard'])->n
 //web worker ruta
 Route::get('/worker',[WorkerController::class, 'index'])->name('web.worker');
 
+Route::get('/canvas', function () {
+    return view('backend.apis');
+})->name('canvas.dibujo');
+
+
 
