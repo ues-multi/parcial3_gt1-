@@ -85,4 +85,4 @@ Route::get('/canvas', function () {
 
 Route::get('/geolocalizacion', function() {
     return view('backend.admin.apis');
-});
+})->name('api.geolocalizacion');

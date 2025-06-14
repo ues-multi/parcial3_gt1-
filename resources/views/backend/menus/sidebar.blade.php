@@ -49,7 +49,25 @@
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>API de Video</p>
                             </a>
-                        </li>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('api.geolocalizacion') }}" target="frameprincipal">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>API de Geolocalizacion</p>
+                            </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('canvas.dibujo') }}" target="frameprincipal">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>API de Canvas</p>
+                            </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('web.worker') }}" target="frameprincipal">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Web Worker</p>
+                            </a>
+                </li>
 
 
 
