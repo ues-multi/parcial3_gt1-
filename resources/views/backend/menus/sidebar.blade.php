@@ -40,9 +40,13 @@
                     </ul>
                  </li>
                 @endcan
-
-
-
+<!-- GELOCALIZACIÓN -->
+<li class="nav-item">
+    <a href="{{ url('/geolocalizacion') }}" class="nav-link">
+        <i class="fas fa-map-marker-alt nav-icon"></i>
+        <p>Geolocalización</p>
+    </a>
+</li>
 
             </ul>
         </nav>
